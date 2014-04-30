@@ -10,11 +10,14 @@ Image::Image(unsigned int width, unsigned int height): _width(width), _height(he
 
 }
 
-Pixel& Image::pixel(unsigned int x, unsigned int y) {
+Pixel& Image::pixel(Pos position) {
     // TODO: Better solution than letting vector handle the error 
     //if(x < width && y < height) 
 
-    return _pixels.at(_width*y + x);
+    if(position._x > -1 && position._x < _width && position._y > -1 && position._y < _height) {
+        return _pixels.at(_width*position._y + position._x);
+    }
+    return _pixels.at(0);
 }
 
 bool Image::loadpicture(const std::string& filename) {
@@ -45,4 +48,13 @@ bool Image::savepicture(const std::string& filename) {
     return success;
 }
 
+//TODO: What is a better way of letting the std::function have access to our internal _pixels?
+void Image::filter(std::function<void(const std::vector<Pixel>& pixels,int,int,int,int)> func) {
+    std::vector<Pixel> canvas(_pixels.size());
 
+
+
+
+
+
+}
