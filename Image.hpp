@@ -3,7 +3,6 @@
 #include <cstddef>
 #include <vector>
 #include <string>
-#include <functional>
 
 typedef unsigned char color;
 
@@ -16,6 +15,7 @@ struct Pos {
     int _x,_y;
     Pos(int x, int y) : _x(x), _y(y) {}
 };
+typedef Pos Dim;
 
 class Image {
     public:
@@ -24,7 +24,9 @@ class Image {
         Pixel& pixel(Pos position);
         bool loadpicture(const std::string& filename);
         bool savepicture(const std::string& filename);
-        void filter(std::function<void(const std::vector<Pixel>& pixels,int,int,int,int)> func);
+        Dim dimension() const { return Dim(_width, _height); }
+        //TODO: Rewrite to make sure _pixels change size as well
+        void setdimension(Dim dim) { _width=dim._x;_height=dim._y;}
 
     private:
         unsigned int _width, _height;

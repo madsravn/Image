@@ -47,14 +47,3 @@ bool Image::savepicture(const std::string& filename) {
     }
     return success;
 }
-
-//TODO: What is a better way of letting the std::function have access to our internal _pixels?
-void Image::filter(std::function<void(const std::vector<Pixel>& pixels,int,int,int,int)> func) {
-    std::vector<Pixel> canvas(_pixels.size());
-
-
-
-
-
-
-}
